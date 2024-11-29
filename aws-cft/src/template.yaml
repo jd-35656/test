@@ -1,0 +1,6 @@
+---
+Resources:
+  s3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: "{{bucket_name.txt}}"

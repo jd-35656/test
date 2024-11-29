@@ -1,0 +1,9 @@
+[tool.black]
+line-length = 79
+
+[tool.isort]
+profile = "black"
+
+[tool.pylint]
+disable = ["W1203", "W0718", "R0801", "E0401"]
+max-line-length = 79
