@@ -1,29 +1,21 @@
 #!/bin/bash
 
-# Prompt for the project name
-read -p "Enter the project name: " project_name
+# Step 1: Get the current Git repository URL from the remote
+REPO_DIR=$(pwd)
 
-# Step 1: Create a new directory with the project name
-mkdir "$project_name"
-cd "$project_name" || exit
+# Step 2: Clone the current repository into the new directory
+# We assume that the script is being run from the repository's root directory
+# and we want to clone the same repository into a new folder.
+git clone "$REPO_DIR" "${REPO_DIR}_clone"
 
-# Step 2: Clone the current repository (assuming the current repo is the origin)
-git clone "$(git config --get remote.origin.url)" .
+# Step 3: Navigate to the newly cloned directory
+cd "${REPO_DIR}_clone" || exit
 
-# Step 3: Reinitialize Git (optional: this will reset the repository settings)
-rm -rf .git
+# Step 4: Initialize the Git repository (if needed)
 git init
 
-# Step 4: Add all files to Git
+# Step 5: Make the first commit if files are already present in the folder
 git add .
-
-# Step 5: Commit the files
 git commit -m "Initial commit with all files"
 
-# Step 6: Set the remote URL (optional - if you want to push to the original repo)
-# git remote add origin <your-remote-repository-url>
-
-# Step 7: Push changes to the remote repository (optional)
-# git push -u origin master
-
-echo "New project $project_name initialized successfully."
+echo "New project initialized successfully in ${REPO_DIR}_clone."
