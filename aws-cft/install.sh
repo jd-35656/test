@@ -1,13 +1,14 @@
 #!/bin/bash
 
-# Step 1: Prompt for the new project name (or use the current directory as the default)
-echo "Enter the new project name (default is the current directory name):"
-read -p "Project Name: " PROJECT_NAME
-
-# If no input is provided, default to the current directory name
-if [ -z "$PROJECT_NAME" ]; then
-  PROJECT_NAME=$(basename "$PWD")
+# Step 1: Check if the user has provided a project name
+if [ -z "$1" ]; then
+  echo "Error: No project name provided."
+  echo "Usage: $0 <Project-Name>"
+  exit 1
 fi
+
+# Get the project name from the first argument
+PROJECT_NAME="$1"
 
 # Step 2: Ask if the user wants to clone the repository (confirmation prompt)
 echo "You are about to clone the repository into a new directory called '$PROJECT_NAME'."
